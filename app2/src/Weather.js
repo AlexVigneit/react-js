@@ -98,7 +98,7 @@ const Weather = () => {
                                         Aujourd'hui:
                                     </Card.Text>
                                     <Card.Text>
-                                        Date: {weatherData.list[0].dt_txt}
+                                        Date: {weatherData.list[0].dt_txt.slice(0, -3)}
                                     </Card.Text>
                                     <Card.Text>
                                         Temperature: {weatherData.list[0].main.temp}°C
