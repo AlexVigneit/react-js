@@ -13,7 +13,7 @@ const Category = () => {
   useEffect(() => {
     fetchCategory();
     fetchData();
-  }, []);
+  }, [activeCategory]); // Re-fetch data when active category changes
 
   const fetchCategory = async () => {
     try {
@@ -41,31 +41,27 @@ const Category = () => {
     setActiveCategory(category);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [activeCategory]);
-
   return (
     <div>
-    {categoryData ? (
-      <Row className="mt-4 justify-content-center">
-        {categoryData.drinks.map((cat, index) => (
-          <Col key={index} xs={6} sm={6} md={3} lg={2}>
-            <Button
-              onClick={() => handleCategoryClick(cat.strCategory)}
-              variant={activeCategory === cat ? 'primary' : 'secondary'}
-              className="m-2 w-100"
-            >
-              {cat.strCategory}
-            </Button>
-          </Col>
-        ))}
-      </Row>
+      {categoryData ? (
+        <Row className="mt-4 justify-content-center">
+          {categoryData.drinks.map((cat, index) => (
+            <Col key={index} xs={6} sm={6} md={3} lg={2}>
+              <Button
+                onClick={() => handleCategoryClick(cat.strCategory)}
+                variant={activeCategory === cat.strCategory ? 'primary' : 'secondary'}
+                className="m-2 w-100"
+              >
+                {cat.strCategory}
+              </Button>
+            </Col>
+          ))}
+        </Row>
       ) : (
         <Col>
-            <p>Loading categories data...</p>
-          </Col>
-        )}
+          <p>Loading categories data...</p>
+        </Col>
+      )}
 
       <Row className="mt-4 justify-content-center">
         {cocktailsData ? (
